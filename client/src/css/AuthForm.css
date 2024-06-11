@@ -1,0 +1,59 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #56c1ab; /* Фон страницы */
+  }
+  
+  .auth-container {
+    background-color: #5c84ae; /* Синий цвет фона */
+    border-radius: 10px; /* Закругленные углы */
+    padding: 20px;
+    max-width: 400px;
+    width: 100%; /* Чтобы контейнер не превышал 400px, но растягивался при меньшем размере экрана */
+    color: white; /* Цвет текста */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для блока */
+  }
+  
+  .auth-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .auth-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .auth-container label {
+    margin-bottom: 5px;
+  }
+  
+  .auth-container input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .auth-container button {
+    padding: 10px;
+    margin-top: 10px; /* Отступ сверху */
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    color: #5c84ae;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .auth-container button:hover {
+    background-color: #5c84ae;
+    color: white;
+  }
+  
