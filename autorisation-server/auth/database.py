@@ -3,7 +3,8 @@ from typing import AsyncGenerator
 from fastapi import Depends
 from fastapi_users.db import SQLAlchemyUserDatabase, SQLAlchemyBaseUserTable
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy import String, Boolean, Integer, Column, ForeignKey
 
 from config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
 
@@ -16,16 +17,19 @@ class Base(DeclarativeBase):
 
 
 class User(SQLAlchemyBaseUserTable[int], Base):
-    pass
+    
+    id = Column("id", Integer, primary_key=True),
+    username = Column("username", String, nullable=False),
+    email = Column("email", String, nullable=False),
+    hashed_password = Column("hashed_password", String, nullable=False),
+    numbers_id = Column("numbers_id", Integer, ForeignKey("number.c.id")),
+    is_active: bool = Column("is_active", Boolean),
+    is_superuser: bool = Column("is_superuser", Boolean),
+    is_verified: bool = Column("is_verified", Boolean)
 
 
 engine = create_async_engine(DATABASE_URL)
 async_session_maker = async_sessionmaker(engine, expire_on_commit=False)
-
-
-async def create_db_and_tables():
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
 
 
 async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
