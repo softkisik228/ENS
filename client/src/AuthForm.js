@@ -7,13 +7,23 @@ const AuthForm = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
-  const handleSubmit = (e) => {
+  const checkUser = async (arr) => {
+    console.log(arr);
+  };
+
+  const registerUser = async (arr) => {
+    console.log(arr);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isLogin) {
       // Логика для авторизации
+      checkUser([email, password]);
       console.log('Login with:', { email, password });
     } else {
       // Логика для регистрации
+      registerUser([username, email, password]);
       console.log('Register with:', { email, password, username });
     }
   };
@@ -54,7 +64,9 @@ const AuthForm = () => {
             required
           />
         </div>
-        <button type="submit">{isLogin ? 'Login' : 'Register'}</button>
+        <button type="submit">
+          {isLogin ? 'Login' : 'Register'}
+        </button>
       </form>
       <button onClick={() => setIsLogin(!isLogin)}>
         {isLogin ? 'Switch to Register' : 'Switch to Login'}
