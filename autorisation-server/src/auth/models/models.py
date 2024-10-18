@@ -1,4 +1,4 @@
-from sqlalchemy import MetaData, Table, Column, Integer, String, ForeignKey, JSON, Boolean
+from sqlalchemy import MetaData, Table, Column, Integer, String, JSON, Boolean
 
 
 metadata = MetaData()
@@ -14,12 +14,4 @@ user = Table(
     Column("is_superuser", Boolean),
     Column("is_verified", Boolean)
 
-)
-
-number = Table(
-    "number", 
-    metadata,
-    Column("id", Integer, primary_key=True),
-    Column("numbers", JSON)
-    
 )

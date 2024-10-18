@@ -27,21 +27,12 @@ app.include_router(
     tags=["auth"],
 )
 
-@app.get("/")
-def read_root():
-    return {"message": "Жопа"}
+# current_user = fastapi_users.current_user()
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
+# @app.get("/protected-route")
+# async def protected_route(user: User = Depends(current_user)):
+#     return f"Hello, {user.email}"
 
-
-current_user = fastapi_users.current_user()
-
-@app.get("/protected-route")
-def protected_route(user: User = Depends(current_user)):
-    return f"Hello, {user.email}"
-
-@app.get("/unprotected-route")
-def unprotected_route():
-    return f"Hello, anonym"
+# @app.get("/unprotected-route")
+# async def unprotected_route():
+#     return f"Hello, anonym"
