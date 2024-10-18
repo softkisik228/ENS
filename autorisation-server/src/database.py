@@ -9,7 +9,7 @@ from sqlalchemy.orm import Mapped, declared_attr, mapped_column
 
 from config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
 
-from .mixins.id_int_pk import IdIntPkMixin
+from auth.mixins.id_int_pk import IdIntPkMixin
 
 
 DATABASE_URL = f"postgresql+asyncpg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
