@@ -8,6 +8,9 @@ from database import User
 from auth.manager import get_user_manager
 from auth.schemas import UserRead, UserCreate
 
+from number.routing import router as router_number
+
+
 app = FastAPI()
 
 fastapi_users = FastAPIUsers[User, int](
@@ -18,14 +21,16 @@ fastapi_users = FastAPIUsers[User, int](
 app.include_router(
     fastapi_users.get_auth_router(auth_backend),
     prefix="/auth/jwt",
-    tags=["auth"],
+    tags=["Auth"],
 )
 
 app.include_router(
     fastapi_users.get_register_router(UserRead, UserCreate),
     prefix="/auth",
-    tags=["auth"],
+    tags=["Auth"],
 )
+
+app.include_router(router_number)
 
 # current_user = fastapi_users.current_user()
 
