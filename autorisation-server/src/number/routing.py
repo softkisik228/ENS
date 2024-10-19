@@ -4,7 +4,7 @@ from sqlalchemy import select, insert, update
 
 from database import get_async_session
 from .models.models import number, message
-from .schemas import NumberAdd
+from .schemas import NumberAdd, MessageAdd
 
 router = APIRouter(
     prefix="/numbers",
@@ -41,6 +41,7 @@ async def add_numbers(new_numbers: NumberAdd, session: AsyncSession = Depends(ge
     if num == None:
         stmnt = insert(number).values(new_numbers)
         await session.execute(stmnt)
+        await session.commit()
     else:
         combined = {**num.numbers, **new_numbers.model_dump()['numbers']}
         stmt = (
@@ -48,7 +49,30 @@ async def add_numbers(new_numbers: NumberAdd, session: AsyncSession = Depends(ge
         .where(number.c.id == new_numbers.model_dump()["id"])
         .values(numbers=combined)
         )
-        print(new_numbers.model_dump()["id"])
         await session.execute(stmt)
         await session.commit()
     return new_numbers
+
+@router.post("/add_message")
+async def add_numbers(new_message: MessageAdd, session: AsyncSession = Depends(get_async_session)):
+    query = select(message).where(message.c.id == new_message.model_dump()["id"])
+    result = await session.execute(query)
+    mes = result.fetchone()
+    if mes == None:
+        stmnt = insert(message).values(new_message.model_dump())
+        await session.execute(stmnt)
+        await session.commit()
+    elif mes.messages == new_message.model_dump()["messages"]:
+        combined = {**mes.numbers, **new_message.model_dump()["numbers"]}
+        stmt = (
+        update(message)
+        .where(message.c.id == new_message.model_dump()["id"])
+        .values(numbers=combined)
+        )
+        await session.execute(stmt)
+        await session.commit()
+    else:
+        stmnt = insert(message).values(new_message.model_dump())
+        await session.execute(stmnt)
+        await session.commit()
+    return new_message
