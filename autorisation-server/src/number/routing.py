@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, insert, update
+from sqlalchemy import select, insert, update, delete
 
 from database import get_async_session
 from .models.models import number, message
@@ -76,3 +76,10 @@ async def add_numbers(new_message: MessageAdd, session: AsyncSession = Depends(g
         await session.execute(stmnt)
         await session.commit()
     return new_message
+
+@router.post("/del_message")
+async def delite_message(id: int, message_to_del: str, session: AsyncSession = Depends(get_async_session)):
+    stmt = delete(message).where((message.c.id == id) & (message.c.messages == message_to_del))
+    await session.execute(stmt)
+    await session.commit()
+    return {"status": "ok"}
