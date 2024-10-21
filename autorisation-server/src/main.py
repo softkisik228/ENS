@@ -13,6 +13,7 @@ from number.routing import router as router_number
 
 app = FastAPI()
 
+
 fastapi_users = FastAPIUsers[User, int](
     get_user_manager,
     [auth_backend],

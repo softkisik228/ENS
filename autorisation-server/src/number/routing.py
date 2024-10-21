@@ -24,13 +24,13 @@ async def get_numbers(number_id: int, session: AsyncSession = Depends(get_async_
 
 @router.get("/get_messages")
 async def get_numbers(message_id: int, session: AsyncSession = Depends(get_async_session)):
-    query = select(message).where(number.c.id == message_id)
+    query = select(message).where(message.c.id == message_id)
     result = await session.execute(query)
-    mes = result.fetchone()
+    mes = result.fetchall()
     
     if mes is None:
         raise HTTPException(status_code=404, detail="Messages not found")
-    return {"id": mes.id,"messages": mes.messages, "numbers": mes.numbers}
+    return [{"id": mes.id,"messages": mes.messages, "numbers": mes.numbers} for mes in mes]
 
 
 @router.post("/add_numbers")
@@ -83,3 +83,4 @@ async def delite_message(id: int, message_to_del: str, session: AsyncSession = D
     await session.execute(stmt)
     await session.commit()
     return {"status": "ok"}
+
