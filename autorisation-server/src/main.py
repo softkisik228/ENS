@@ -8,7 +8,7 @@ from database import User
 from auth.manager import get_user_manager
 from auth.schemas import UserRead, UserCreate
 
-from number.routing import router as router_number
+from emails.routing import router as router_email
 
 
 app = FastAPI()
@@ -31,7 +31,7 @@ app.include_router(
     tags=["Auth"],
 )
 
-app.include_router(router_number)
+app.include_router(router_email)
 
 # current_user = fastapi_users.current_user()
 

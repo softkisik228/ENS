@@ -3,11 +3,11 @@ from sqlalchemy import MetaData, Table, Column, Integer, String, JSON, Boolean
 
 metadata = MetaData()
 
-number = Table(
-    "number", 
+email = Table(
+    "email", 
     metadata,
     Column("id", Integer),
-    Column("numbers", JSON)
+    Column("emails", JSON)
     
 )
 
@@ -16,6 +16,6 @@ message = Table(
     metadata,
     Column("id", Integer),
     Column("messages", String),
-    Column("numbers", JSON)
+    Column("emails", JSON)
     
 )
