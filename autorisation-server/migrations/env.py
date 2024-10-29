@@ -6,7 +6,7 @@ from sqlalchemy import pool
 from alembic import context
 
 from src.auth.models.models import metadata as auth_metadata
-from src.number.models.models import metadata as number_metadata
+from src.emails.models.models import metadata as number_metadata
 
 
 from src.config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER

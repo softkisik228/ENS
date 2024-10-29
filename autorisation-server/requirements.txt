@@ -1,8 +1,12 @@
 alembic==1.13.3
-fastapi==0.115.2
+celery==5.4.0
+fastapi==0.115.4
 fastapi_users==13.0.0
-pydantic==2.9.2
+pydantic>=2.9.2
 python-dotenv==1.0.1
 SQLAlchemy==2.0.35
-celery==5.4.0
 flower==2.0.1
+fastapi-users[sqlalchemy]
+asyncpg
+gunicorn
+uvicorn

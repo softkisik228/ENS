@@ -105,4 +105,3 @@ async def send_message(message_to_send: MessageToSend, session: AsyncSession = D
         print(e)
         return e
     return {"status": "ok"}
-
