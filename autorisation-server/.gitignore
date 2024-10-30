@@ -1,4 +1,4 @@
-.env
-.env-non-dev
-.venv
-.__pycache__
+autorisation-server/env
+autorisation-server/env-non-dev
+autorisation-server/venv
+autorisation-server/__pycache__
