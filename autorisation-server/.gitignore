@@ -1,2 +1,4 @@
-autorisation-server/.env
+.env
 .env-non-dev
+.venv
+.__pycache__
